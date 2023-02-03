@@ -1,0 +1,17 @@
+$font-base: 16;
+
+@function rem($currentValue){
+	$result: ($currentValue/$font-base)+rem;
+
+	@return $result
+}
+$maxWidth: 1358; 
+$minWidth: 768;
+@mixin adpative($propety, $minValue, $maxValue){
+	#{$propety}: calc(#{$minValue + px} + (#{$maxValue} -  #{$minValue}) * ((100vw - #{$minWidth + px}) / (#{$maxWidth} - #{$minWidth})));
+}
+
+@mixin adpativeMin($propety, $minValue, $maxValue){
+	#{$propety}: calc(#{$minValue + px} + (#{$maxValue} -  #{$minValue}) * ((100vw - #{320 + px}) / (#{$maxWidth} - 320)));
+}
+
