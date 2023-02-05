@@ -252,7 +252,7 @@ const massage = {
 postData(subscribeForm);
 
 function postData(formS){
-	formS.addEventListener('click', (e) => {
+	formS.addEventListener('submit', (e) => {
 		e.preventDefault();
 		console.log(e.target)
 		const statusMessage = document.createElement('div');
