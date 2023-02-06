@@ -49,6 +49,7 @@ iconMenu.addEventListener('click', () => {
 	overflovBlock.classList.toggle('lock');
 });
 
+
 /* Cart */
 const productBnt = document.querySelectorAll('.item__buy');
 const cartProductList = document.querySelector('.cart-content__list');
@@ -126,6 +127,7 @@ function showQuantity() {
 productBnt.forEach(item => {
 	item.closest('.body-store__item').setAttribute('data-id', randomId());
 	item.addEventListener('click', (e) => {
+		
 		let self = e.currentTarget;
 		let parrent = self.closest('.body-store__item');
 		let id = parrent.dataset.id;
@@ -163,7 +165,6 @@ shoppingCart.addEventListener('click', (e) => {
 });
 
 document.body.addEventListener('click', (e) => {
-	e.preventDefault();
 	if (!e.target.closest(".action-header__shopping") && !e.target.closest('.cart-product__delete')) {
 		hideCart();
 	}
@@ -245,7 +246,7 @@ const subscribeForm = document.querySelector('.form-subscribe__body');
 
 const massage = {
 	loading: 'loading',
-	succses: 'Than you',
+	succses: 'Thank you',
 	failure: 'Ups, ERROR',
 };
 
@@ -257,22 +258,33 @@ function postData(formS){
 		console.log(e.target)
 		const statusMessage = document.createElement('div');
 		statusMessage.textContent = massage.loading;
+		statusMessage.classList.add('status');
 		formS.append(statusMessage);
 
 
 		const request = new XMLHttpRequest();
 		request.open('POST', 'server.php');
 
-		request.setRequestHeader('Content-type', 'multipart/form-data');
+		request.setRequestHeader('Content-type', 'application/json');
+		const formData = new FormData(formS);
 
-		const formData = new formData(formS);
+		const object = {};
 
-		request.send(formData);
+		formData.forEach((value, key) => {
+			object[key] = value;
+		});
+
+		const json = JSON.stringify(object);
+		request.send(json);
 
 		request.addEventListener('load', () =>{
 			if (request.status === 200) {
 				console.log(request.response);
 				statusMessage.textContent = massage.succses;
+				formS.reset();
+				setTimeout(() => {
+					statusMessage.remove();
+				}, 2000);
 			}else {
 				statusMessage.textContent = massage.failure;
 			}
