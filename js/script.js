@@ -245,7 +245,7 @@ document.addEventListener('keydown', (event) => {
 const subscribeForm = document.querySelector('.form-subscribe__body');
 
 const massage = {
-	loading: 'loading',
+	loading: '<img src="img/form/spinner.svg">',
 	succses: 'Thank you',
 	failure: 'Ups, ERROR',
 };
@@ -257,9 +257,9 @@ function postData(formS){
 		e.preventDefault();
 		console.log(e.target)
 		const statusMessage = document.createElement('div');
-		statusMessage.textContent = massage.loading;
+		statusMessage.innerHTML = massage.loading;
 		statusMessage.classList.add('status');
-		formS.append(statusMessage);
+		formS.insertAdjacentElement('afterend',	statusMessage);
 
 
 		const request = new XMLHttpRequest();

@@ -955,6 +955,10 @@ img {
   line-height: 1.69;
   padding-bottom: calc(35px + (48 - 35) * ((100vw - 768px) / (1358 - 768)));
 }
+.subscribe .status {
+  margin-top: 0.9375rem;
+}
+
 .form-subscribe__body {
   height: 1.9375rem;
   display: -webkit-box;
